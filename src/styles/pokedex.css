@@ -1,0 +1,28 @@
+.pokedex {
+    @apply center-pokedex pokedex-size
+}
+
+.center-pokedex {
+    transform: translate(-50%, -50%);
+    top: 46%;
+    @apply left-2/4
+}
+
+.pokedex-size {
+    height: 95vh;
+    width: 70vw;
+}
+
+.pokedex-container {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.pokedex-background-color {
+    width: 100%;
+    height: 100%;
+    position: inherit;
+    background-color: rgba(0, 0, 0, 0.5);
+}

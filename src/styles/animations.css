@@ -1,0 +1,15 @@
+.flip {
+  animation: centerElement 1s forwards;
+  @apply z-10 fixed;
+}
+
+@keyframes centerElement {
+  0% {
+    
+  }
+  100% {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(2);
+  }
+}
