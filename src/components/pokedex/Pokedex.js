@@ -19,7 +19,7 @@ const Pokedex = (props) => {
 
     const closePokemon = () => {
         const pkmn = document.getElementById(props.selectedPokemon);
-        pkmn.classList.remove("flip");
+        pkmn.classList.remove("closed");
     }
 
     return(

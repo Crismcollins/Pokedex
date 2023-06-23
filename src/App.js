@@ -43,7 +43,8 @@ function App() {
   const contextValue = {
     consumeAPI: consumeAPI,
     setPokedexOpened: setPokedexOpened,
-    setSelectedPokemon: setSelectedPokemon
+    setSelectedPokemon: setSelectedPokemon,
+    pokedexOpened: pokedexOpened
   };
 
   return (
@@ -51,7 +52,7 @@ function App() {
       <div className='dark:bg-slate-800 min-h-screen p-5'>
       <Searcher setPokemonsFiltered={setPokemonsFiltered} pokemons={pokemons}/>
       <GridPokemon pokemons={pokemonsFiltered}/>
-      {pokedexOpened && <Pokedex opened={pokedexOpened} selectedPokemon={selectedPokemon} />}
+      {/* {pokedexOpened && <Pokedex opened={pokedexOpened} selectedPokemon={selectedPokemon} />} */}
     </div>
     </PokemonListContext.Provider>
   );

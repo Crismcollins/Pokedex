@@ -1,5 +1,6 @@
 import Context from '../contexts/PokemonListContext';
 import { useState, useContext, useEffect } from "react";
+import "../styles/types.css";
 
 const Type = (props) => {
     const [types, setTypes] = useState([]);
