@@ -35,6 +35,10 @@ function App() {
     await setPokemons(pokemonsData);
     await setPokemonsFiltered(pokemonsData);
   }
+
+  const addZeroToLeft = (number) => {
+    return ("00" + number).slice(-3);
+  };
   
   useEffect(() => {
     getAllPokemons();
@@ -44,7 +48,8 @@ function App() {
     consumeAPI: consumeAPI,
     setPokedexOpened: setPokedexOpened,
     setSelectedPokemon: setSelectedPokemon,
-    pokedexOpened: pokedexOpened
+    pokedexOpened: pokedexOpened,
+    addZeroToLeft: addZeroToLeft
   };
 
   return (
@@ -52,7 +57,7 @@ function App() {
       <div className='dark:bg-slate-800 min-h-screen p-5'>
       <Searcher setPokemonsFiltered={setPokemonsFiltered} pokemons={pokemons}/>
       <GridPokemon pokemons={pokemonsFiltered}/>
-      {/* {pokedexOpened && <Pokedex opened={pokedexOpened} selectedPokemon={selectedPokemon} />} */}
+      {pokedexOpened && <Pokedex opened={pokedexOpened} selectedPokemon={selectedPokemon} />}
     </div>
     </PokemonListContext.Provider>
   );

@@ -1,11 +1,10 @@
 import Context from "../contexts/PokemonListContext";
-import { openPokemon, closePokemon, getTranslateValues } from "../scripts/CenterAnimation.js"
+import { openPokemon, closePokemon } from "../scripts/CenterAnimation.js"
 import "../styles/animations.css";
 import "../styles/types.css";
 import { useContext, useEffect, useState } from "react";
 
 const CardPokemon = (props) => {
-  const [detail, setDetail] = useState({});
   const [specie, setSpecie] = useState({});
   const [card, setCard] = useState(null);
   const pokemon = props.data;
@@ -20,8 +19,17 @@ const CardPokemon = (props) => {
   useEffect (() => {
     if (null !== card)
       addListenner();
-    //console.log(detail)
   }, [card]);
+
+  useEffect (() => {
+    if (null === card)
+      return;
+
+    if (!context.pokedexOpened)
+      closeCard();
+
+
+  }, [context.pokedexOpened]);
 
   const setPokemonSpecie = async () => {
     const specieList = await context.consumeAPI(
@@ -31,34 +39,12 @@ const CardPokemon = (props) => {
     await setSpecie(specieList);
   }
 
-  const getDetail = async (id) => {
-
-    if (context.pokedexOpened){
-      closeCard(id);
-      return;
-    }
-
-    const descriptionsLanguage = specie.flavor_text_entries.filter(description => description.language.name === "es");
-    const removeRepeatedDescriptions = [...new Map(descriptionsLanguage.map(description => [description.flavor_text, description])).values()];
-        
-    
-    setDetail({
-      id: pokemon.id,
-      name: pokemon.name,
-      flavor: removeRepeatedDescriptions,
-      height: pokemon.height,
-      weight: pokemon.weight
-    });
-
-    openCard(id);
-  };
-
   const openCard = (id) => {
     openPokemon(card);
     selectPokemon(id, true);
   }
 
-  const closeCard = (id) => {
+  const closeCard = () => {
     closePokemon(card);
     selectPokemon(0, false);
   }
@@ -68,10 +54,6 @@ const CardPokemon = (props) => {
     context.setSelectedPokemon(idPokemon);
     context.setPokedexOpened(pokedexOpen);
   }
-
-  const addZeroToLeft = (number) => {
-    return ("00" + number).slice(-3);
-  };
 
   const addListenner = () => {
     card.addEventListener("animationend", (event) => {
@@ -86,7 +68,7 @@ const CardPokemon = (props) => {
       <div className={`pr-4 rounded-xl p-3 sm:hidden ${pokemon.types[0].type.name}-type ${pokemon.types[0].type.name}-border`}>
         <div className="flex justify-between">
           <h2 className="text-2xl text-center">{pokemon.name}</h2>
-          <h3 className="text-2xl">#{addZeroToLeft(pokemon.id)}</h3>
+          <h3 className="text-2xl">#{context.addZeroToLeft(pokemon.id)}</h3>
         </div>
 
         <div className="flex justify-between">
@@ -113,11 +95,11 @@ const CardPokemon = (props) => {
       <div
         className={`hidden cardPokemon sm:block rounded-xl p-3 ${pokemon.types[0].type.name}-type ${pokemon.types[0].type.name}-border`}
         id={props.id}
-        onClick={() => getDetail(props.id)}
+        onClick={() => openCard(pokemon.id)}
       >
         
           <div className="">
-            <h3 className="text-2xl">#{addZeroToLeft(pokemon.id, specie)}</h3>
+            <h3 className="text-2xl">#{context.addZeroToLeft(pokemon.id, specie)}</h3>
           </div>
 
           <div>

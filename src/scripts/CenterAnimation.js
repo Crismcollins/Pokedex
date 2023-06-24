@@ -22,6 +22,4 @@ const setLeftTopValuesToFixedItem = (card) => {
 
 export const closePokemon = (card) => {
   card.classList.replace("opened", "closed");
-
-  
 };
