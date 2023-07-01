@@ -14,10 +14,6 @@ const Pokedex = (props) => {
     loadDataPokemon();
   }, []);
 
-  useEffect(() => {
-    //console.log(dataPokemon)
-  }, [dataPokemon]);
-
   const close = () => {
     context.setPokedexOpened(false);
     document.body.classList.remove("no-scroll");
@@ -60,34 +56,6 @@ const Pokedex = (props) => {
     });
   };
 
-// const getEvolutions = (pokemon, evObj) => {
-//     const pokemonName = pokemon.species.name;
-
-//     if (!evObj.base)
-//         evObj["base"] = pokemonName;
-
-//     if (pokemon.evolves_to.length > 0) {
-//       const evolutionsArray = pokemon.evolves_to;
-
-//       evolutionsArray.forEach((evolution) => {
-//         const evolutions = evolution.species.name;
-//         evObj["evolutions"].push(evolutions);
-
-//         if (evolution.evolves_to.length > 0)
-//           getEvolutions(evolution, evObj);
-//       });
-//     }
-
-//     return evObj;
-//   };
-
-
-
-
-
-
-
-
   return (
     <div className="pokedex-container fixed">
       <div
@@ -96,11 +64,6 @@ const Pokedex = (props) => {
       ></div>
 
       <Evolutions evolutionsList={evolutions} />
-      {/* <img
-        className="pokedex fixed scale-[1.8] mt-8 mb-4"
-        src={pokedexImage}
-        alt="Descripción de la imagen"
-      /> */}
     </div>
   );
 };
